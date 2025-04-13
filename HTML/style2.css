@@ -1,8 +1,3 @@
-.body {
-  font-family: monospace;
-  margin: 0;
-  padding: 0;
-}
 .main-background {
   width: 100%;
   height: 500px;
@@ -38,10 +33,12 @@
 }
 
 article {
+  text-align: center;
   background-color: #eee;
-  width: 500px;
+  width: 80%;
+  max-width: 500px;
   margin: auto;
-  padding: 10px;
+  padding: 20px;
   position: relative;
   top: -40px;
 }
