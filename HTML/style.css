@@ -1,0 +1,102 @@
+.navbar > li {
+  display: inline-block;
+  width: 60px;
+  text-align: center;
+  background: #eee;
+  padding: 10px;
+}
+
+.navbar a {
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.profile {
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.content {
+  text-align: center;
+}
+
+.box {
+  width: 100px;
+  background: cadetblue;
+  margin-left: 30px;
+  padding: 40px;
+  border: 2px solid black;
+  border-radius: 1rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1rem;
+  box-shadow: 0rem 0rem 1rem darkgray;
+}
+
+.container {
+  width: 800px;
+  height: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  height: 50px;
+  background: aquamarine;
+}
+
+.left-menu {
+  width: 20%;
+  height: 400px;
+  float: left;
+  background-color: cornflowerblue;
+}
+
+.right {
+  width: 80%;
+  height: 400px;
+  float: left;
+  background-color: coral;
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  background-color: grey;
+  clear: both;
+}
+
+.blog-content {
+  width: 80%;
+  height: 150px;
+  background: #eee;
+  float: left;
+}
+
+.blog-image {
+  background-color: coral;
+  float: right;
+  height: 150px;
+  width: 20%;
+}
+
+.blog-profile {
+  display: block;
+  float: left;
+  width: 50px;
+  border: 1px solid white;
+  border-radius: 30px;
+}
+
+.blog-name {
+  float: left;
+}
+.m-0 {
+  margin: 0;
+}
