@@ -1,0 +1,21 @@
+.f-small {
+  font-size: 12px;
+}
+
+.f-mid {
+  font-size: 16px;
+}
+
+.btn {
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.bg-blue {
+  background-color: skyblue;
+}
+
+.bg-red {
+  background-color: orangered;
+}
