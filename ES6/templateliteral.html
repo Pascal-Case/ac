@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var pants = 20;
+      var socks = 100;
+
+      function func(s, ...v) {
+        console.log(s);
+        console.log(v);
+
+        return `${s[1]}${v[0]} ${s[0]}${v[1]}`;
+      }
+
+      console.log(func`바지${pants}양말${socks}`);
+    </script>
+  </body>
+</html>

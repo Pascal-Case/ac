@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = ['aa', 'bb'];
+      console.log(...arr);
+      var str = 'hello';
+      console.log(str[0]);
+      console.log(...str);
+
+      var a = [1, 2, 3];
+      var b = [...a];
+      var c = [...a, ...b];
+
+      a[3] = 100;
+
+      console.log(c);
+      console.log(a);
+
+      var o1 = { a: 1, b: 2 };
+      var o2 = { c: 3 };
+      var o3 = { ...o1, ...o2 };
+      console.log(o3);
+
+      function sum(a, b, c) {
+        console.log(a + b + c);
+      }
+      var arr = [1, 2, 3];
+      sum(...arr);
+      sum.apply(undefined, arr);
+
+      var foo = {
+        hi(a) {
+          console.log(this.name + ' hello ' + a);
+        },
+      };
+
+      var bar = {
+        name: 'jack',
+      };
+
+      foo.hi.apply(bar, ['asdf']);
+      foo.hi.call(bar, 'asdf');
+    </script>
+  </body>
+</html>

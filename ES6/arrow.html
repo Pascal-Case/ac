@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">d</button>
+  </body>
+
+  <script>
+    var foo = (a, b) => a + 10;
+    foo(5);
+
+    [1, 2, 3, 4].forEach((a) => console.log(a));
+
+    var obj = {
+      foo: () => {
+        console.log(this);
+      },
+      bar() {
+        console.log(this);
+      },
+    };
+    obj.foo();
+    obj.bar();
+
+    var person = {
+      name: 'john',
+      sayHi() {
+        console.log(this.name + ' hello!');
+      },
+    };
+
+    person.sayHi();
+
+    var obj = {
+      data: [1, 2, 3, 4, 5],
+      sum() {
+        var s = 0;
+        this.data.forEach((e) => {
+          s += e;
+        });
+        console.log(s);
+      },
+    };
+
+    obj.sum();
+
+    document.getElementById('btn').addEventListener('click', func);
+
+    function func(e) {
+      setTimeout(() => {
+        console.log(this.innerHTML);
+      }, 1000);
+    }
+  </script>
+</html>

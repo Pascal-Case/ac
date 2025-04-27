@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      console.log(this);
+
+      function g() {
+        console.log(this);
+      }
+
+      g();
+
+      var obj = {
+        data: 'kim',
+        foo: function () {
+          console.log(this); // 오브젝트 내에서는 그 함수를 가지고 있는 오브젝트를 의미
+        },
+      };
+
+      var obj2 = {
+        data: {
+          foo() {
+            console.log(this);
+          },
+        },
+      };
+
+      obj.foo();
+      obj2.data.foo();
+
+      console.log('------------------');
+    </script>
+    <button id="btn" data-id="1">btn</button>
+    <script defer>
+      var d = {};
+
+      function m() {
+        this.이름 = 'kim';
+      }
+
+      var obj = new m();
+
+      console.log(obj);
+      document.getElementById('btn').addEventListener('click', function (e) {
+        var arr = [1, 2, 3];
+
+        arr.forEach(function (a) {
+          console.log(a);
+          console.log(this);
+        });
+      });
+
+      var obj = {
+        names: ['kim', 'lee', 'park'],
+        foo: function () {
+          obj.names.forEach(function () {
+            console.log(this);
+          });
+        },
+      };
+      obj.foo();
+    </script>
+  </body>
+</html>
