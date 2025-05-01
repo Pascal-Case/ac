@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function 학생(name) {
+        this.name = name;
+        this.age = 20;
+
+        this.sayHi = () => {
+          console.log(`${this.name} hi`);
+        };
+      }
+
+      학생.prototype.hi = () => {
+        console.log('hi');
+      };
+
+      var student1 = new 학생('kim');
+      console.log(student1);
+
+      var student2 = new 학생('pakr');
+      console.log(student2);
+      student1.hi();
+
+      var arr = [1, 2, 3];
+      var arr2 = new Array(1, 2, 3);
+    </script>
+  </body>
+</html>

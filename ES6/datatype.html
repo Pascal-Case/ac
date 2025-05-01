@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var v = '111';
+      var arr = [1, 2, 3];
+      var obj = { name: 'kim' };
+      var obj2 = obj;
+      obj.name = 'park';
+
+      console.log(obj, obj2);
+
+      console.log('--');
+
+      var 이름1 = { name: '김' };
+
+      function 변경1(obj) {
+        obj = { name: 'park' };
+      }
+
+      변경1(이름1);
+
+      console.log(이름1);
+
+      console.log('--');
+
+      var 이름1 = { name: '김' };
+
+      function 변경(obj) {
+        obj.name = 'park';
+      }
+
+      변경(이름1);
+      console.log(이름1);
+    </script>
+  </body>
+</html>
