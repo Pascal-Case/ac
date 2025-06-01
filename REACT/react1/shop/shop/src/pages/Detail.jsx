@@ -1,4 +1,16 @@
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+
+let YellowBtn = styled.button`
+  background: ${(props) => props.bg};
+  color: black;
+  padding: 10px;
+`;
+
+let Box = styled.div`
+  background: grey;
+  padding: 20px;
+`;
 
 function Detail(props) {
   let { id } = useParams();
@@ -14,7 +26,9 @@ function Detail(props) {
           <h4 className="pt-5">{item.title}</h4>
           <p>{item.content}</p>
           <p>{item.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <YellowBtn className="btn" bg="lightgray">
+            주문하기
+          </YellowBtn>
         </div>
       </div>
     </div>
