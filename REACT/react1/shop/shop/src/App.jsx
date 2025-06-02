@@ -1,8 +1,9 @@
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Row from 'react-bootstrap/Row';
+
 import './App.css';
 import Card from './components/Card';
 import data from './data';
