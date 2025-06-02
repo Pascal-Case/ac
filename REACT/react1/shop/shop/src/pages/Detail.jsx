@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
 
 function Detail(props) {
   // 재랜더링마다
@@ -31,6 +32,7 @@ function Detail(props) {
 
   let [alert, setAlert] = useState(true);
   let [count, setCount] = useState(0);
+  let [tab, setTab] = useState(0);
 
   let { id } = useParams();
   const item = props.shoes.find((i) => i.id == id);
@@ -60,8 +62,31 @@ function Detail(props) {
           </Button>
         </Col>
       </Row>
+
+      <Nav variant="pills" defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link eventKey="link0" onClick={() => setTab(0)}>
+            버튼0
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link1" onClick={() => setTab(1)}>
+            버튼1
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link2" onClick={() => setTab(2)}>
+            버튼2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TabContent tab={tab} />
     </Container>
   );
+}
+
+function TabContent({ tab }) {
+  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab];
 }
 
 export default Detail;

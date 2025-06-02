@@ -71,7 +71,7 @@ function App() {
         <Route path="*" element={<div>404</div>} />
       </Routes>
 
-      <div className="text-center">
+      <div className="text-center d-none">
         <Button
           className="btn-success"
           onClick={() => {
