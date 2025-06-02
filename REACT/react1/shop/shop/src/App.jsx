@@ -10,9 +10,11 @@ import data from './data';
 import Detail from './pages/Detail';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+import Button from 'react-bootstrap/esm/Button';
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -68,6 +70,25 @@ function App() {
         </Route>
         <Route path="*" element={<div>404</div>} />
       </Routes>
+
+      <div className="text-center">
+        <Button
+          className="btn-success"
+          onClick={() => {
+            axios
+              .get('https://codingapple1.github.io/shop/data2.json')
+              .then((res) => {
+                const prev = [...shoes, ...res.data];
+                setShoes(prev);
+              })
+              .catch(() => {
+                console.log('fail');
+              });
+          }}
+        >
+          버튼
+        </Button>
+      </div>
     </>
   );
 }
