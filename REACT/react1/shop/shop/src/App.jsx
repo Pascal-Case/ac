@@ -9,12 +9,15 @@ import Card from './components/Card';
 import data from './data';
 import Detail from './pages/Detail';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/esm/Button';
 
+export let Context1 = createContext();
+
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [stock, setStock] = useState([10, 11, 12]);
   let navigate = useNavigate();
 
   return (
@@ -59,7 +62,14 @@ function App() {
             </>
           }
         />
-        <Route path="/detail/:id" element={<Detail shoes={shoes}></Detail>} />
+        <Route
+          path="/detail/:id"
+          element={
+            <Context1.Provider value={{ stock, shoes }}>
+              <Detail shoes={shoes}></Detail>
+            </Context1.Provider>
+          }
+        />
         <Route path="/about" element={<About></About>}>
           <Route path="member" element={<div>멤버</div>}></Route>
           <Route path="location" element={<div>장소</div>}></Route>

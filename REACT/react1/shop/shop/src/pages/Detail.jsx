@@ -1,14 +1,17 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
+import { Context1 } from '../App';
 
 function Detail(props) {
   let [fade2, setFade2] = useState('');
+
+  let { stock } = useContext(Context1);
 
   useEffect(() => {
     setFade2('end');
@@ -89,13 +92,14 @@ function Detail(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <TabContent tab={tab} />
+      <TabContent tab={tab} shoes={props.shoes} />
     </Container>
   );
 }
 
-function TabContent({ tab }) {
+function TabContent({ tab, shoes }) {
   let [fade, setFade] = useState('');
+  let { stock } = useContext(Context1);
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -107,7 +111,7 @@ function TabContent({ tab }) {
     };
   }, [tab]);
 
-  return <div className={`start ${fade}`}>{[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}</div>;
+  return <div className={`start ${fade}`}>{[<div>내용0 {stock}</div>, <div>내용1</div>, <div>내용2</div>][tab]}</div>;
 }
 
 export default Detail;
