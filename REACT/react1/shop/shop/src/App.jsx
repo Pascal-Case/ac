@@ -12,12 +12,13 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import { createContext, useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/esm/Button';
+import Cart from './pages/Cart';
 
 export let Context1 = createContext();
 
 function App() {
   let [shoes, setShoes] = useState(data);
-  let [stock, setStock] = useState([10, 11, 12]);
+  let [stock] = useState([10, 11, 12]);
   let navigate = useNavigate();
 
   return (
@@ -31,10 +32,10 @@ function App() {
               <Nav.Link href="/">홈</Nav.Link>
               <Nav.Link
                 onClick={() => {
-                  navigate('/detail');
+                  navigate('/cart');
                 }}
               >
-                상세페이지
+                장바구니
               </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -55,7 +56,7 @@ function App() {
             <>
               <div className="main-bg"></div>
               <Row>
-                {shoes.map((item, i) => {
+                {shoes.map((item) => {
                   return <Card key={item.id} shoes={item}></Card>;
                 })}
               </Row>
@@ -70,6 +71,7 @@ function App() {
             </Context1.Provider>
           }
         />
+        <Route path="/cart" element={<Cart />}></Route>
         <Route path="/about" element={<About></About>}>
           <Route path="member" element={<div>멤버</div>}></Route>
           <Route path="location" element={<div>장소</div>}></Route>
