@@ -8,6 +8,15 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 
 function Detail(props) {
+  let [fade2, setFade2] = useState('');
+
+  useEffect(() => {
+    setFade2('end');
+    return () => {
+      setFade2('');
+    };
+  }, []);
+
   // 재랜더링마다
   useEffect(() => {});
   // mount시 1회
@@ -38,7 +47,7 @@ function Detail(props) {
   const item = props.shoes.find((i) => i.id == id);
 
   return (
-    <Container>
+    <Container className={`start ${fade2}`}>
       {alert ? (
         <div className="alert alert-warning" id="discount">
           할인
@@ -86,7 +95,19 @@ function Detail(props) {
 }
 
 function TabContent({ tab }) {
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab];
+  let [fade, setFade] = useState('');
+
+  useEffect(() => {
+    let a = setTimeout(() => {
+      setFade('end');
+    }, 100);
+    return () => {
+      clearTimeout(a);
+      setFade('');
+    };
+  }, [tab]);
+
+  return <div className={`start ${fade}`}>{[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}</div>;
 }
 
 export default Detail;
