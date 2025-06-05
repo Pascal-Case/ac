@@ -7,11 +7,15 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import { Context1 } from '../App';
+import { useDispatch } from 'react-redux';
+import { addCart } from '../store/cartSlice';
 
 function Detail(props) {
   let [fade2, setFade2] = useState('');
 
-  let { stock } = useContext(Context1);
+  useContext(Context1);
+
+  let dispatch = useDispatch();
 
   useEffect(() => {
     setFade2('end');
@@ -43,7 +47,7 @@ function Detail(props) {
   }, []);
 
   let [alert, setAlert] = useState(true);
-  let [count, setCount] = useState(0);
+  let [count] = useState(0);
   let [tab, setTab] = useState(0);
 
   let { id } = useParams();
@@ -67,7 +71,7 @@ function Detail(props) {
           <Button
             variant="outline-success"
             onClick={() => {
-              setCount(count + 1);
+              dispatch(addCart(item));
             }}
           >
             주문하기 {count}
