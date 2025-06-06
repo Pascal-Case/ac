@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useContext, useEffect, useState, useMemo, useCallback } from 'react';
+import { useContext, useEffect, useState, useMemo, useCallback, use } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,6 +9,8 @@ import Nav from 'react-bootstrap/Nav';
 import { Context1 } from '../App';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../store/cartSlice';
+import { useLike } from '../hooks/like';
+import axios from 'axios';
 
 // 상수 분리
 const ALERT_DURATION = 2000;
@@ -84,6 +86,14 @@ function Detail({ shoes = [] }) {
   const handleTabChange = useCallback((tabIndex) => {
     setTab(tabIndex);
   }, []);
+  let [like, addLike] = useLike();
+  let [name, setName] = useState('');
+
+  useEffect(() => {
+    axios.get('/username.json').then((res) => {
+      setName(res.data);
+    });
+  }, []);
 
   // 상품이 없는 경우 처리
   if (!currentItem) {
@@ -96,12 +106,13 @@ function Detail({ shoes = [] }) {
 
   return (
     <Container className={`start ${fadeClass}`}>
+      {name}
+      {like}{' '}
       {showAlert && (
         <div className="alert alert-warning" id="discount">
           할인
         </div>
       )}
-
       <Row>
         <Col md={6}>
           <Image src={currentItem.src} width="100%" thumbnail alt={currentItem.title} />
@@ -113,9 +124,11 @@ function Detail({ shoes = [] }) {
           <Button variant="outline-success" onClick={handleAddToCart} size="lg">
             주문하기
           </Button>
+          <span style={{ cursor: 'pointer' }} onClick={() => addLike()}>
+            💛
+          </span>
         </Col>
       </Row>
-
       <TabNavigation currentTab={tab} onTabChange={handleTabChange} />
       <TabContent tab={tab} currentItem={currentItem} />
     </Container>
