@@ -1,5 +1,5 @@
 // 1. React 관련 import (가장 먼저)
-import { createContext, useEffect, useState, lazy, Suspense } from 'react';
+import { createContext, useEffect, useState, lazy, Suspense, useTransition, useDeferredValue } from 'react';
 
 // 2. 라우터 관련 import
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
@@ -47,8 +47,22 @@ function App() {
       }),
   });
 
+  // let a = new Array(5000).fill(0);
+  // let [name, setName] = useState('');
+  // let [isPending, startTransition] = useTransition();
+  // let state = useDeferredValue(name);
   return (
     <>
+      {/* <div>
+        <input
+          onChange={(e) => {
+            startTransition(() => {
+              setName(e.target.value);
+            });
+          }}
+        ></input>
+        {isPending ? '로딩중' : a.map(() => <div>{state}</div>)}
+      </div> */}
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
