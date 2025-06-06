@@ -1,19 +1,30 @@
+// 1. React 관련 import (가장 먼저)
+import { createContext, useEffect, useState, lazy, Suspense } from 'react';
+
+// 2. 라우터 관련 import
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+
+// 3. 외부 라이브러리 import (알파벳 순)
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+
+// 4. Bootstrap/UI 라이브러리 import (관련된 것끼리 그룹화)
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+// 5. 스타일 import
 import './App.css';
+
+// 6. 상대 경로 import (내부 모듈)
 import Card from './components/Card';
 import data from './data';
-import Detail from './pages/Detail';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
-import { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import Button from 'react-bootstrap/esm/Button';
-import Cart from './pages/Cart';
-import { useQuery } from '@tanstack/react-query';
+
+const Detail = lazy(() => import('./pages/Detail'));
+const Cart = lazy(() => import('./pages/Cart'));
 
 export let Context1 = createContext();
 
@@ -69,39 +80,41 @@ function App() {
         </Container>
       </Navbar>
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <div className="main-bg"></div>
-              <Row>
-                {shoes.map((item) => {
-                  return <Card key={item.id} shoes={item}></Card>;
-                })}
-              </Row>
-            </>
-          }
-        />
-        <Route
-          path="/detail/:id"
-          element={
-            <Context1.Provider value={{ stock, shoes }}>
-              <Detail shoes={shoes}></Detail>
-            </Context1.Provider>
-          }
-        />
-        <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/about" element={<About></About>}>
-          <Route path="member" element={<div>멤버</div>}></Route>
-          <Route path="location" element={<div>장소</div>}></Route>
-        </Route>
-        <Route path="/event" element={<Event></Event>}>
-          <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>}></Route>
-          <Route path="two" element={<div>생일기념 쿠폰받기</div>}></Route>
-        </Route>
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
+      <Suspense fallback={<div>로딩중</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <div className="main-bg"></div>
+                <Row>
+                  {shoes.map((item) => {
+                    return <Card key={item.id} shoes={item}></Card>;
+                  })}
+                </Row>
+              </>
+            }
+          />
+          <Route
+            path="/detail/:id"
+            element={
+              <Context1.Provider value={{ stock, shoes }}>
+                <Detail shoes={shoes}></Detail>
+              </Context1.Provider>
+            }
+          />
+          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/about" element={<About></About>}>
+            <Route path="member" element={<div>멤버</div>}></Route>
+            <Route path="location" element={<div>장소</div>}></Route>
+          </Route>
+          <Route path="/event" element={<Event></Event>}>
+            <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>}></Route>
+            <Route path="two" element={<div>생일기념 쿠폰받기</div>}></Route>
+          </Route>
+          <Route path="*" element={<div>404</div>} />
+        </Routes>
+      </Suspense>
 
       <div className="text-center d-none">
         <Button
