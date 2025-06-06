@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useMemo, useCallback } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,112 +10,182 @@ import { Context1 } from '../App';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../store/cartSlice';
 
-function Detail(props) {
-  let [fade2, setFade2] = useState('');
+// 상수 분리
+const ALERT_DURATION = 2000;
+const FADE_DELAY = 100;
 
-  useContext(Context1);
+// 최근 본 상품 로컬스토리지 관리 훅
+const useRecentlyViewed = (itemId) => {
+  useEffect(() => {
+    if (!itemId) return;
 
-  let dispatch = useDispatch();
+    try {
+      const latest = JSON.parse(localStorage.getItem('latest') || '[]');
+      const updatedLatest = Array.from(new Set([...latest, itemId]));
+      localStorage.setItem('latest', JSON.stringify(updatedLatest));
+    } catch (error) {
+      console.error('Failed to update recently viewed items:', error);
+    }
+  }, [itemId]);
+};
+
+// 페이드 애니메이션 훅
+const useFadeAnimation = (dependency = []) => {
+  const [fade, setFade] = useState('');
 
   useEffect(() => {
-    setFade2('end');
-    return () => {
-      setFade2('');
-    };
-  }, []);
-
-  // 재랜더링마다
-  useEffect(() => {});
-  // mount시 1회
-  useEffect(() => {}, []);
-
-  useEffect(() => {
-    return () => {
-      // unmount시 1회
-    };
-  }, []);
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      setAlert(false);
-      console.log('end!');
-    }, 2000);
+    const timer = setTimeout(() => setFade('end'), FADE_DELAY);
 
     return () => {
-      console.log('기존 타이머 제거');
       clearTimeout(timer);
+      setFade('');
     };
+  }, dependency);
+
+  return fade;
+};
+
+// 할인 알림 훅
+const useDiscountAlert = () => {
+  const [alert, setAlert] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlert(false);
+    }, ALERT_DURATION);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  let [alert, setAlert] = useState(true);
-  let [count] = useState(0);
-  let [tab, setTab] = useState(0);
+  return alert;
+};
 
-  let { id } = useParams();
-  const item = props.shoes.find((i) => i.id == id);
+function Detail({ shoes = [] }) {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const [tab, setTab] = useState(0);
+
+  // 현재 상품 찾기 (useMemo로 최적화)
+  const currentItem = useMemo(() => shoes.find((item) => item.id === parseInt(id)), [shoes, id]);
+
+  // 커스텀 훅들 사용
+  useRecentlyViewed(currentItem?.id);
+  const fadeClass = useFadeAnimation();
+  const showAlert = useDiscountAlert();
+
+  // 장바구니 추가 핸들러
+  const handleAddToCart = useCallback(() => {
+    if (currentItem) {
+      dispatch(addCart(currentItem));
+    }
+  }, [dispatch, currentItem]);
+
+  // 탭 변경 핸들러
+  const handleTabChange = useCallback((tabIndex) => {
+    setTab(tabIndex);
+  }, []);
+
+  // 상품이 없는 경우 처리
+  if (!currentItem) {
+    return (
+      <Container className="text-center py-5">
+        <h3>상품을 찾을 수 없습니다.</h3>
+      </Container>
+    );
+  }
 
   return (
-    <Container className={`start ${fade2}`}>
-      {alert ? (
+    <Container className={`start ${fadeClass}`}>
+      {showAlert && (
         <div className="alert alert-warning" id="discount">
           할인
         </div>
-      ) : null}
-      <Row key={item.id}>
+      )}
+
+      <Row>
         <Col md={6}>
-          <Image src={item.src} width="100%" thumbnail />
+          <Image src={currentItem.src} width="100%" thumbnail alt={currentItem.title} />
         </Col>
         <Col md={6} className="text-center">
-          <h4 className="pt-5">{item.title}</h4>
-          <p>{item.content}</p>
-          <p>{item.price}</p>
-          <Button
-            variant="outline-success"
-            onClick={() => {
-              dispatch(addCart(item));
-            }}
-          >
-            주문하기 {count}
+          <h4 className="pt-5">{currentItem.title}</h4>
+          <p>{currentItem.content}</p>
+          <p className="fw-bold">{currentItem.price}원</p>
+          <Button variant="outline-success" onClick={handleAddToCart} size="lg">
+            주문하기
           </Button>
         </Col>
       </Row>
 
-      <Nav variant="pills" defaultActiveKey="link0">
-        <Nav.Item>
-          <Nav.Link eventKey="link0" onClick={() => setTab(0)}>
-            버튼0
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link1" onClick={() => setTab(1)}>
-            버튼1
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link2" onClick={() => setTab(2)}>
-            버튼2
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <TabContent tab={tab} shoes={props.shoes} />
+      <TabNavigation currentTab={tab} onTabChange={handleTabChange} />
+      <TabContent tab={tab} currentItem={currentItem} />
     </Container>
   );
 }
 
-function TabContent({ tab, shoes }) {
-  let [fade, setFade] = useState('');
-  let { stock } = useContext(Context1);
+// 탭 네비게이션 컴포넌트 분리
+function TabNavigation({ currentTab, onTabChange }) {
+  const tabs = [
+    { key: 'link0', label: '상품설명', index: 0 },
+    { key: 'link1', label: '리뷰', index: 1 },
+    { key: 'link2', label: '배송정보', index: 2 },
+  ];
 
-  useEffect(() => {
-    let a = setTimeout(() => {
-      setFade('end');
-    }, 100);
-    return () => {
-      clearTimeout(a);
-      setFade('');
-    };
-  }, [tab]);
+  return (
+    <Nav variant="pills" className="mt-4">
+      {tabs.map(({ key, label, index }) => (
+        <Nav.Item key={key}>
+          <Nav.Link eventKey={key} active={currentTab === index} onClick={() => onTabChange(index)}>
+            {label}
+          </Nav.Link>
+        </Nav.Item>
+      ))}
+    </Nav>
+  );
+}
 
-  return <div className={`start ${fade}`}>{[<div>내용0 {stock}</div>, <div>내용1</div>, <div>내용2</div>][tab]}</div>;
+// 탭 컨텐츠 컴포넌트 개선
+function TabContent({ tab, currentItem }) {
+  const { stock } = useContext(Context1);
+  const fadeClass = useFadeAnimation([tab]);
+
+  const tabContents = [
+    <ProductDescription stock={stock[currentItem.id]} />,
+    <ProductReviews currentItem={currentItem} />,
+    <ShippingInfo />,
+  ];
+
+  return <div className={`start ${fadeClass} mt-3`}>{tabContents[tab]}</div>;
+}
+
+// 각 탭 컨텐츠를 별도 컴포넌트로 분리
+function ProductDescription({ stock }) {
+  return (
+    <div className="p-3">
+      <h5>상품 설명</h5>
+      <p>현재 재고: {stock}개</p>
+      <p>이 상품은 고품질 소재로 제작되었습니다.</p>
+    </div>
+  );
+}
+
+function ProductReviews({ currentItem }) {
+  return (
+    <div className="p-3">
+      <h5>고객 리뷰</h5>
+      <p>{currentItem.title}</p>
+      <p>리뷰 내용이 여기에 표시됩니다.</p>
+    </div>
+  );
+}
+
+function ShippingInfo() {
+  return (
+    <div className="p-3">
+      <h5>배송 정보</h5>
+      <p>무료배송 (5만원 이상 구매시)</p>
+      <p>평균 배송기간: 2-3일</p>
+    </div>
+  );
 }
 
 export default Detail;

@@ -9,7 +9,7 @@ import Card from './components/Card';
 import data from './data';
 import Detail from './pages/Detail';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/esm/Button';
 import Cart from './pages/Cart';
@@ -17,6 +17,11 @@ import Cart from './pages/Cart';
 export let Context1 = createContext();
 
 function App() {
+  useEffect(() => {
+    const latest = localStorage.getItem('latest');
+    if (!latest) localStorage.setItem('latest', JSON.stringify([]));
+  }, []);
+
   let [shoes, setShoes] = useState(data);
   let [stock] = useState([10, 11, 12]);
   let navigate = useNavigate();
