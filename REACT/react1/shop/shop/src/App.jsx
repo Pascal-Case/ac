@@ -13,6 +13,7 @@ import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/esm/Button';
 import Cart from './pages/Cart';
+import { useQuery } from '@tanstack/react-query';
 
 export let Context1 = createContext();
 
@@ -25,6 +26,15 @@ function App() {
   let [shoes, setShoes] = useState(data);
   let [stock] = useState([10, 11, 12]);
   let navigate = useNavigate();
+
+  const result = useQuery({
+    queryKey: ['users'],
+    queryFn: () =>
+      fetch('https://codingapple1.github.io/userdata.json').then((res) => {
+        console.log('요청');
+        return res.json();
+      }),
+  });
 
   return (
     <>
@@ -49,6 +59,11 @@ function App() {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown>
+            </Nav>
+            <Nav className="ms-auto">
+              안녕하세요 {result.isLoading && '로딩중'}
+              {result.isError && '에러'}
+              {result.data && result.data.name}
             </Nav>
           </Navbar.Collapse>
         </Container>
