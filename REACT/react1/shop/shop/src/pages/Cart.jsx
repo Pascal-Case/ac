@@ -3,13 +3,25 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeAge } from '../store/userSlice.js';
 import { increamentItem, deleteItem } from '../store/cartSlice.js';
+import { memo, useState } from 'react';
+
+let Child = memo(function () {
+  console.log('재렌더링');
+  return <div>자식</div>;
+});
+
 function Cart() {
   let cart = useSelector((state) => state.cart);
   let user = useSelector((state) => state.user);
+  let [count, setCount] = useState(0);
   let dispatch = useDispatch();
 
   return (
     <div>
+      <Child></Child>
+      <Button className="btn-sm" onClick={() => setCount(count + 1)}>
+        +
+      </Button>
       <h2>
         {user.name}의 장바구니. {user.age}
       </h2>
