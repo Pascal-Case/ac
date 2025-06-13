@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="57400c82-f08d-4bc3-8378-4c68fdaeb7d7" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/.prettierrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/yang7.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2yJl4gKmpn78MH8loxf4Ac2eWKV" />
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.sourceCode.TypeScript",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="57400c82-f08d-4bc3-8378-4c68fdaeb7d7" name="변경" comment="" />
+      <created>1749560373916</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749560373916</updated>
+      <workItem from="1749560377964" duration="279000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/ex6/index.js" />
+        <option value="$PROJECT_DIR$/ex6/index.d.ts" />
+        <option value="$PROJECT_DIR$/ex9/index.js" />
+        <option value="$PROJECT_DIR$/ex9/index.d.ts" />
+        <option value="$PROJECT_DIR$/ex1/index4.js" />
+        <option value="$PROJECT_DIR$/ex1/index4.d.ts" />
+        <option value="$PROJECT_DIR$/ex1/index2.js" />
+        <option value="$PROJECT_DIR$/ex1/index2.d.ts" />
+        <option value="$PROJECT_DIR$/ex1/index3.js" />
+        <option value="$PROJECT_DIR$/ex1/index3.d.ts" />
+        <option value="$PROJECT_DIR$/ex11/index.js" />
+        <option value="$PROJECT_DIR$/ex11/index.d.ts" />
+        <option value="$PROJECT_DIR$/ex7/index.js" />
+        <option value="$PROJECT_DIR$/ex7/index.d.ts" />
+        <option value="$PROJECT_DIR$/ex1/index.js" />
+        <option value="$PROJECT_DIR$/ex1/index.d.ts" />
+        <option value="$PROJECT_DIR$/ex1/index5.js" />
+        <option value="$PROJECT_DIR$/ex1/index5.d.ts" />
+        <option value="$PROJECT_DIR$/ex5/index.js" />
+        <option value="$PROJECT_DIR$/ex5/index.d.ts" />
+        <option value="$PROJECT_DIR$/ex10/index.js" />
+        <option value="$PROJECT_DIR$/ex10/index.d.ts" />
+        <option value="$PROJECT_DIR$/ex8/index.js" />
+        <option value="$PROJECT_DIR$/ex8/index.d.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
